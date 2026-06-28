@@ -1,138 +1,83 @@
-# AI201 Project 3 – TakeMeter
+AI201 Project 3 – TakeMeter
+Community
 
-# Milestone 1: Community and Label Design
+Chosen Community: r/nba (Reddit NBA Community)
 
-## Community
+Why this community?
 
-**Chosen Community:** r/nba (Reddit NBA Discussion)
+I chose r/nba because it is one of the largest and most active basketball discussion communities on Reddit. Every day, users post game reactions, player evaluations, trade discussions, statistical analyses, and questions about the NBA. This variety makes it an excellent dataset for a text classification project because posts naturally differ in both content and writing style.
 
-### Community Description
+The community is also a good fit because there are meaningful differences between evidence-based basketball analysis and unsupported opinions. These distinctions matter to regular members of the community and create a realistic machine learning classification task.
 
-This project focuses on r/nba, one of the largest online basketball discussion communities. Users discuss NBA games, players, trades, coaching decisions, and league news through a mixture of statistical analysis, opinions, emotional reactions, and questions. Distinguishing between these types of posts is valuable because members often debate whether a take is well-supported or simply an emotional opinion.
+Label Taxonomy
+Label 1 – Analysis
 
----
-
-# Label Taxonomy
-
-## Label 1: Analysis
-
-### Definition
+Definition
 
 A post that supports its main claim using evidence such as statistics, historical comparisons, tactical reasoning, or detailed explanations.
 
-### Clear Example 1
+Example 1
 
-"The Celtics' defense has improved significantly since the All-Star break. Their defensive rating dropped from 115 to 109 because they're switching more effectively on pick-and-rolls."
+"The Celtics improved their defense after the All-Star break by switching more often, lowering opponents' three-point percentage."
 
-### Clear Example 2
+Example 2
 
-"Denver's offense falls nearly eight points per 100 possessions whenever Jokic sits, showing how important he is beyond scoring."
+"Denver's offensive rating drops nearly eight points per 100 possessions whenever Jokic leaves the floor."
 
-### Uncertain Example
+Label 2 – Hot Take
 
-"LeBron is overrated because his playoff record against top-seeded teams is below .500."
+Definition
 
----
+A post that makes a bold opinion without providing substantial evidence or reasoning.
 
-## Label 2: Hot Take
+Example 1
 
-### Definition
+"Wembanyama will become the greatest NBA player ever before he turns 25."
 
-A bold opinion stated confidently without enough supporting evidence or reasoning.
-
-### Clear Example 1
-
-"Wembanyama will become the greatest basketball player of all time before he turns 25."
-
-### Clear Example 2
+Example 2
 
 "Analytics completely ruined basketball."
 
-### Uncertain Example
+Label 3 – Reaction
 
-"LeBron is overrated because his playoff record against top-seeded teams is below .500."
+Definition
 
----
+A post that mainly expresses an emotional response to a recent game, player performance, or NBA event.
 
-## Label 3: Reaction
+Example 1
 
-### Definition
+"Luka's game winner was unbelievable!"
 
-A post whose primary purpose is expressing an emotional response to a recent game, player performance, or NBA event.
+Example 2
 
-### Clear Example 1
+"Those referees were absolutely terrible tonight."
 
-"Luka's game winner was absolutely insane!!"
+Label 4 – Information Seeking
 
-### Clear Example 2
+Definition
 
-"These referees are terrible. Worst officiating I've seen all season."
+A post whose main purpose is asking a genuine basketball-related question.
 
-### Uncertain Example
-
-"The referees clearly favored Boston tonight."
-
----
-
-## Label 4: Information Seeking
-
-### Definition
-
-A post whose primary purpose is asking a genuine question or requesting information.
-
-### Clear Example 1
+Example 1
 
 "Can someone explain how Bird Rights work?"
 
-### Clear Example 2
+Example 2
 
 "Why do NBA teams intentionally foul near the end of games?"
 
-### Uncertain Example
+Hard Edge Cases
 
-"Should the Lakers trade for another center?"
+One difficult case is a post that contains both an opinion and a statistic.
 
----
-
-# Hardest Edge Case
-
-### Example
+Example:
 
 "LeBron is overrated because his playoff record against top-seeded opponents is below .500."
 
-### Possible Labels
+This could be labeled as either Analysis or Hot Take.
 
-- Analysis
-- Hot Take
+Decision Rule
 
-### Decision Rule
+If the statistic is part of a structured argument that explains the conclusion, the post will be labeled Analysis.
 
-If the evidence forms part of a structured argument with multiple supporting points, the post will be labeled **Analysis**.
-
-If the evidence is only used to strengthen a provocative opinion without additional reasoning, it will be labeled **Hot Take**.
-
----
-
-# Mutual Exclusivity
-
-These labels are designed so that each post belongs to exactly one category.
-
-| Post Type | Assigned Label |
-|------------|----------------|
-| Uses evidence and reasoning | Analysis |
-| Unsupported opinion | Hot Take |
-| Emotional response | Reaction |
-| Genuine question | Information Seeking |
-
-Priority Rules:
-
-1. If the primary purpose is asking a question, label it **Information Seeking**.
-2. Otherwise, if the post contains substantial evidence and reasoning, label it **Analysis**.
-3. Otherwise, if the post mainly expresses emotion, label it **Reaction**.
-4. All remaining opinion-based posts become **Hot Take**.
-
----
-
-# Why These Labels Matter
-
-NBA discussions contain many different styles of communication. Some users support their opinions with statistics and logical reasoning, while others simply react emotionally or make bold predictions. By distinguishing between Analysis, Hot Take, Reaction, and Information Seeking, the classifier can better capture the quality and intent of basketball discussions rather than simply identifying whether a post is positive or negative.
+If the statistic is only included to strengthen a provocative opinion without further reasoning, it will be labeled Hot Take.
